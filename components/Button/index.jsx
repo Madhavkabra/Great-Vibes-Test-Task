@@ -4,14 +4,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const stylesByVariant = {
-  primary: 'shadow-sm bg-primary text-white  ',
-  secondary: 'bg-white border border-primary text-primary',
+  primary: 'shadow-sm bg-primary text-white rounded-md',
+  secondary: 'bg-white border border-primary text-primary rounded-1x',
 };
 
 export default function Button({ label, variant = 'primary', ...props }) {
   return (
     <button
-      className={`capitalize py-2 px-4 rounded-md text-base font-medium ${stylesByVariant[variant]}`}
+      className={`capitalize py-2 px-4 text-base font-medium ${stylesByVariant[variant]}`}
       {...props}
     >
       {label}

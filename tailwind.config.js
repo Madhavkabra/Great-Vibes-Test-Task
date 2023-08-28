@@ -10,7 +10,8 @@ module.exports = {
         card: '#E6E6E6',
       },
       borderRadius: {
-        lg: '10px',
+        '1x': '5px',
+        '2x': '10px',
       },
       textColor: {
         dark: '#212121',
