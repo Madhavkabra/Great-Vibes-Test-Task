@@ -9,6 +9,9 @@ module.exports = {
       borderColor: {
         card: '#E6E6E6',
       },
+      borderRadius: {
+        lg: '10px',
+      },
       textColor: {
         dark: '#212121',
         white: '#FAFAFA',
