@@ -11,6 +11,7 @@ const stylesByVariant = {
 
 export default function Button({
   label,
+  className,
   variant = 'primary',
   fullWidth = false,
   height = 'h-10',
@@ -19,10 +20,11 @@ export default function Button({
   return (
     <button
       className={cx(
-        `capitalize py-2 px-4 text-base font-medium hover:opacity-80 ${height} ${stylesByVariant[variant]}`,
+        `capitalize py-2 px-4 text-base font-medium hover:opacity-80 focus:outline-transparent ${height} ${stylesByVariant[variant]}`,
         {
           'w-full': fullWidth,
           'w-fit': !fullWidth,
+          [className]: className,
         }
       )}
       {...props}
@@ -35,4 +37,7 @@ export default function Button({
 Button.propTypes = {
   label: PropTypes.string.isRequired,
   variant: PropTypes.oneOf(['primary', 'secondary']),
+  className: PropTypes.string,
+  fullWidth: PropTypes.bool,
+  height: PropTypes.string,
 };

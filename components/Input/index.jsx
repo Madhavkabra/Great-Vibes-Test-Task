@@ -2,6 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import InputLabel from '../InputLabel';
+import FormHelperText from '../FormHelperText';
 
 export default function Input({
   onChange,
@@ -13,11 +15,10 @@ export default function Input({
   return (
     <div className='flex flex-col gap-1'>
       {label && (
-        <label className='text-sm font-medium text-dark'>
-          {label}
-
-          {required && <span className='text-error'>*</span>}
-        </label>
+        <InputLabel
+          label={label}
+          required={required}
+        />
       )}
 
       <input
@@ -26,9 +27,7 @@ export default function Input({
         {...props}
       />
 
-      {error && (
-        <label className='text-xs font-medium text-error'>{error}</label>
-      )}
+      {error && <FormHelperText error={error} />}
     </div>
   );
 }
