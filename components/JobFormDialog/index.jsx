@@ -20,9 +20,10 @@ export default function JobFormDialog({
     if (isEdit) {
       methods.reset({ ...jobDetail });
     } else {
+      methods.unregister();
       methods.reset({});
     }
-  }, [isEdit, jobDetail]);
+  }, [isEdit, jobDetail, open]);
 
   return (
     <Dialog

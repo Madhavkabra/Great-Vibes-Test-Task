@@ -26,6 +26,7 @@ export default function Dashboard() {
   };
 
   const handleJobFormClose = () => {
+    setJobIndex(null);
     setOpenJobFormDialog(false);
   };
 
@@ -34,7 +35,6 @@ export default function Dashboard() {
       const jobsData = [...jobs];
       jobsData.splice(jobIndex, 1, formData);
 
-      setJobIndex(null);
       setJobs(jobsData);
     } else {
       setJobs([...jobs, formData]);
