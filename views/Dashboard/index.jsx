@@ -32,6 +32,7 @@ export default function Dashboard() {
 
   const handleJobFormClose = () => {
     setJobIndex(null);
+    setIsEditJob(false);
     setOpenJobFormDialog(false);
   };
 
@@ -45,7 +46,6 @@ export default function Dashboard() {
       setJobs([...jobs, formData]);
     }
 
-    setIsEditJob(false);
     handleJobFormClose();
   };
 
