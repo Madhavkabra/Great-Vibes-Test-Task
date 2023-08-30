@@ -130,6 +130,7 @@ export default function Dashboard() {
         onClose={resetDeleteJobStates}
         onCancel={resetDeleteJobStates}
         onConfirm={handleConfirmDeleteJob}
+        heading='Delete Job'
       >
         <Typography>
           Do you want to delete {jobs?.[jobIndex]?.title} job?
