@@ -2,6 +2,7 @@
 module.exports = {
   content: [
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './views/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -21,6 +22,7 @@ module.exports = {
       },
       colors: {
         primary: '#1597E4',
+        'light-silver': '#D8D8D8',
       },
     },
   },
