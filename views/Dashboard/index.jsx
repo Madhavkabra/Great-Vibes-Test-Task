@@ -6,6 +6,7 @@ import Button from '@/components/Button';
 import ConfirmationDialog from '@/components/ConfirmationDialog';
 import JobCard from '@/components/JobCard';
 import JobFormDialog from '@/components/JobFormDialog';
+import Loader from '@/components/Loader';
 import Typography from '@/components/Typography';
 import React, { useEffect, useState } from 'react';
 
@@ -16,14 +17,19 @@ export default function Dashboard() {
   const [isEditJob, setIsEditJob] = useState(false);
   const [openDeleteConfirmationDialog, setOpenDeleteConfirmationDialog] =
     useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchJobs = async () => {
+    setIsLoading(true);
+
     try {
       const jobsRes = await getJobs();
       setJobs(jobsRes);
     } catch (error) {
       console.error(error);
     }
+
+    setIsLoading(false);
   };
 
   const handleClickOnCreateJobButton = () => {
@@ -93,16 +99,22 @@ export default function Dashboard() {
       </div>
 
       <div className='px-[85px]'>
-        <div className='grid grid-cols-2 gap-x-[83px] gap-y-[79px] pt-[30px] pb-[49px]'>
-          {jobs.map((job, jobIndex) => (
-            <JobCard
-              key={job?.id}
-              jobDetail={job}
-              onEdit={() => handleEditJob(jobIndex)}
-              onDelete={() => handleDeleteJob(jobIndex)}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className='flex justify-center items-center h-64'>
+            <Loader />
+          </div>
+        ) : (
+          <div className='grid grid-cols-2 gap-x-[83px] gap-y-[79px] pt-[30px] pb-[49px]'>
+            {jobs.map((job, jobIndex) => (
+              <JobCard
+                key={job?.id}
+                jobDetail={job}
+                onEdit={() => handleEditJob(jobIndex)}
+                onDelete={() => handleDeleteJob(jobIndex)}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <JobFormDialog
