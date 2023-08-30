@@ -33,23 +33,17 @@ export default function JobFormStepper({ onSave, isEdit }) {
       {}
     );
 
-    if (isEdit) {
-      try {
-        const res = await updateJob(body.id, body);
-        onSave(res);
-      } catch (error) {
-        console.error({ error });
-      }
-    } else {
-      try {
-        const res = await createJob(body);
-        onSave(res);
-      } catch (error) {
-        console.error({ error });
-      }
+    try {
+      const res = isEdit
+        ? await updateJob(body.id, body)
+        : await createJob(body);
+
+      reset({});
+      onSave(res);
+    } catch (error) {
+      console.error({ error });
     }
 
-    reset({});
     setIsSubmitting(false);
   };
 
@@ -63,7 +57,7 @@ export default function JobFormStepper({ onSave, isEdit }) {
           setFormValues({ ...formValues, one: form });
         break;
 
-      default:
+      case 1:
         !isError && handleSubmit({ ...formValues, two: form });
         break;
     }

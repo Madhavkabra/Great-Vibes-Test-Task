@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
-import Input from '../Input';
 import { useFormContext } from 'react-hook-form';
+import Input from '../Input';
 
 export default function JobFormStep1() {
   const {
@@ -17,6 +19,7 @@ export default function JobFormStep1() {
         error={errors.title?.message}
         {...register('title', { required: 'Job title is required' })}
       />
+
       <Input
         label='Company name'
         required
@@ -24,6 +27,7 @@ export default function JobFormStep1() {
         error={errors.companyName?.message}
         {...register('companyName', { required: 'Company name is required' })}
       />
+
       <Input
         label='Industry'
         required

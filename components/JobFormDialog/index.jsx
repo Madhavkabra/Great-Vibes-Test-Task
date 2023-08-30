@@ -51,4 +51,23 @@ JobFormDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSave: PropTypes.func,
+  isEdit: PropTypes.bool,
+  jobDetail: PropTypes.shape({
+    companyName: PropTypes.string,
+    companyLogo: PropTypes.string,
+    title: PropTypes.string,
+    industry: PropTypes.string,
+    location: PropTypes.string,
+    remoteType: PropTypes.string,
+    experience: PropTypes.shape({
+      min: PropTypes.number.isRequired,
+      max: PropTypes.number.isRequired,
+    }),
+    salary: PropTypes.shape({
+      min: PropTypes.number.isRequired,
+      max: PropTypes.number.isRequired,
+    }),
+    totalEmployee: PropTypes.string,
+    applyType: PropTypes.oneOf(['quick', 'external']),
+  }),
 };

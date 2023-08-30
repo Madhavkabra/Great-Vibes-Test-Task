@@ -2,10 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid';
+import { formatNumber } from '@/functions/formatNumber';
+import { APPLY_TYPE } from '@/constants/jobForm';
 import Card from '../Card';
 import Typography from '../Typography';
 import Button from '../Button';
-import { formatNumber } from '@/functions/formatNumber';
 
 export default function JobCard({ jobDetail, onEdit, onDelete }) {
   return (
@@ -44,7 +45,7 @@ export default function JobCard({ jobDetail, onEdit, onDelete }) {
             <Typography>{jobDetail.totalEmployee} employees</Typography>
           </div>
 
-          {jobDetail.applyType === 'quick' ? (
+          {jobDetail.applyType === APPLY_TYPE.QUICK ? (
             <Button label={'Apply Now'} />
           ) : (
             <Button
@@ -74,11 +75,11 @@ JobCard.propTypes = {
   onDelete: PropTypes.func.isRequired,
   jobDetail: PropTypes.shape({
     companyName: PropTypes.string.isRequired,
-    companyLogo: PropTypes.string.isRequired,
+    companyLogo: PropTypes.string,
     title: PropTypes.string.isRequired,
     industry: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
-    remoteType: PropTypes.oneOf(['in-office', 'remote', 'hybrid']).isRequired,
+    remoteType: PropTypes.string.isRequired,
     experience: PropTypes.shape({
       min: PropTypes.number.isRequired,
       max: PropTypes.number.isRequired,
@@ -88,6 +89,7 @@ JobCard.propTypes = {
       max: PropTypes.number.isRequired,
     }).isRequired,
     totalEmployee: PropTypes.string.isRequired,
-    applyType: PropTypes.oneOf(['quick', 'external']).isRequired,
-  }),
+    applyType: PropTypes.oneOf([APPLY_TYPE.EXTERNAL, APPLY_TYPE.QUICK])
+      .isRequired,
+  }).isRequired,
 };

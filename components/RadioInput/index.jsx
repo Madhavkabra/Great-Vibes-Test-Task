@@ -1,3 +1,5 @@
+'use client';
+
 import { RadioGroup } from '@headlessui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -69,7 +71,7 @@ export default function RadioInput({
 }
 
 RadioInput.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   error: PropTypes.string,
