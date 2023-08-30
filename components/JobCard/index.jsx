@@ -10,7 +10,7 @@ import Button from '../Button';
 
 export default function JobCard({ jobDetail, onEdit, onDelete }) {
   return (
-    <Card className='py-4 px-6 min-w-[600px]'>
+    <Card className='py-4 px-6 min-w-[420px]'>
       <div className='flex gap-2'>
         <div>
           <Image
@@ -59,10 +59,12 @@ export default function JobCard({ jobDetail, onEdit, onDelete }) {
           <PencilSquareIcon
             className='h-6 w-6 cursor-pointer text-primary hover:opacity-70'
             onClick={onEdit}
+            title='Edit'
           />
           <TrashIcon
             className='h-6 w-6  cursor-pointer text-placeholder hover:opacity-70'
             onClick={onDelete}
+            title='Delete'
           />
         </div>
       </div>
