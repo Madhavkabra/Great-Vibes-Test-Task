@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 const stylesByVariant = {
-  primary: 'shadow-sm bg-primary text-white rounded-md',
+  primary: 'shadow-sm bg-primary text-white rounded-md disabled:opacity-40',
   secondary: 'bg-white border border-primary text-primary rounded-1x',
 };
 
