@@ -33,11 +33,11 @@ export default function JobFormStepper({ onSave }) {
         {}
       );
 
-      await createJob(body);
+      const res = await createJob(body);
+      onSave(res);
     } catch (error) {
       console.error({ error });
     } finally {
-      onSave();
       setIsSubmitting(false);
     }
   };

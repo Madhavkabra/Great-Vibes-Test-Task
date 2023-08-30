@@ -7,7 +7,7 @@ import { Dialog } from '@headlessui/react';
 import JobFormStepper from '../JobFormStepper';
 import Card from '../Card';
 
-export default function JobFormDialog({ open, onClose }) {
+export default function JobFormDialog({ open, onClose, onSave }) {
   const methods = useForm({ mode: 'onBlur', defaultValues: {} });
 
   return (
@@ -20,7 +20,7 @@ export default function JobFormDialog({ open, onClose }) {
         <Dialog.Panel>
           <Card className='w-[577px] relative'>
             <FormProvider {...methods}>
-              <JobFormStepper onSave={onClose} />
+              <JobFormStepper onSave={onSave} />
             </FormProvider>
           </Card>
         </Dialog.Panel>
@@ -32,4 +32,5 @@ export default function JobFormDialog({ open, onClose }) {
 JobFormDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func,
 };

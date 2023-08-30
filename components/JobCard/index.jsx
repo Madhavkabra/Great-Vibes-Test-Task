@@ -15,7 +15,7 @@ export default function JobCard({ jobDetail }) {
             alt={jobDetail.companyName}
             height={48}
             width={48}
-            className='rounded-1x'
+            className='rounded-1x h-12'
           />
         </div>
         <div className='flex flex-col flex-grow gap-6 '>
