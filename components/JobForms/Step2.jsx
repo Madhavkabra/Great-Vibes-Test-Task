@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Input from '../Input';
 import Field from '../Field';
 import InputLabel from '../InputLabel';
@@ -7,15 +7,10 @@ import { useFormContext, Controller } from 'react-hook-form';
 
 export default function JobFormStep2() {
   const {
-    reset,
     register,
     getValues,
     formState: { errors },
   } = useFormContext();
-
-  useEffect(() => {
-    reset({});
-  }, []);
 
   return (
     <div className='flex flex-col gap-6'>
@@ -85,7 +80,6 @@ export default function JobFormStep2() {
         required
         label='Total employee'
         placeholder='ex. 100'
-        type='number'
         error={errors.totalEmployee?.message}
         {...register('totalEmployee', {
           required: 'Total employee is required',

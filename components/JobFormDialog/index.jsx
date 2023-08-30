@@ -1,14 +1,28 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useForm, FormProvider } from 'react-hook-form';
 import { Dialog } from '@headlessui/react';
 import JobFormStepper from '../JobFormStepper';
 import Card from '../Card';
 
-export default function JobFormDialog({ open, onClose, onSave }) {
+export default function JobFormDialog({
+  open,
+  onClose,
+  onSave,
+  isEdit,
+  jobDetail,
+}) {
   const methods = useForm({ mode: 'onBlur', defaultValues: {} });
+
+  useEffect(() => {
+    if (isEdit) {
+      methods.reset({ ...jobDetail });
+    } else {
+      methods.reset({});
+    }
+  }, [isEdit, jobDetail]);
 
   return (
     <Dialog
@@ -20,7 +34,10 @@ export default function JobFormDialog({ open, onClose, onSave }) {
         <Dialog.Panel>
           <Card className='w-[577px] relative'>
             <FormProvider {...methods}>
-              <JobFormStepper onSave={onSave} />
+              <JobFormStepper
+                onSave={onSave}
+                isEdit={isEdit}
+              />
             </FormProvider>
           </Card>
         </Dialog.Panel>

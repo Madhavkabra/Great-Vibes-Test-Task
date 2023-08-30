@@ -1,6 +1,6 @@
 'use client';
 
-import { createJob } from '@/apis/job/create';
+import { createJob, updateJob } from '@/apis/job/create';
 import React, { useMemo, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import PropTypes from 'prop-types';
@@ -9,10 +9,11 @@ import JobFormStep2 from '../JobForms/Step2';
 import Button from '../Button';
 import Typography from '../Typography';
 
-export default function JobFormStepper({ onSave }) {
+export default function JobFormStepper({ onSave, isEdit }) {
   const {
     watch,
     trigger,
+    reset,
     formState: { errors },
   } = useFormContext();
   const [activeStep, setActiveStep] = useState(0);
@@ -24,22 +25,32 @@ export default function JobFormStepper({ onSave }) {
   const handleSubmit = async (formData) => {
     setIsSubmitting(true);
 
-    try {
-      const body = Object.values(formData).reduce(
-        (acc, curr) => ({
-          ...acc,
-          ...curr,
-        }),
-        {}
-      );
+    const body = Object.values(formData).reduce(
+      (acc, curr) => ({
+        ...acc,
+        ...curr,
+      }),
+      {}
+    );
 
-      const res = await createJob(body);
-      onSave(res);
-    } catch (error) {
-      console.error({ error });
-    } finally {
-      setIsSubmitting(false);
+    if (isEdit) {
+      try {
+        const res = await updateJob(body.id, body);
+        onSave(res);
+      } catch (error) {
+        console.error({ error });
+      }
+    } else {
+      try {
+        const res = await createJob(body);
+        onSave(res);
+      } catch (error) {
+        console.error({ error });
+      }
     }
+
+    reset({});
+    setIsSubmitting(false);
   };
 
   const handleClickNextButton = async () => {
@@ -90,4 +101,5 @@ export default function JobFormStepper({ onSave }) {
 
 JobFormStepper.propTypes = {
   onSave: PropTypes.func,
+  isEdit: PropTypes.bool,
 };

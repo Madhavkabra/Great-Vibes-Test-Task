@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Input from '../Input';
 import { useFormContext } from 'react-hook-form';
 
 export default function JobFormStep1() {
   const {
-    reset,
     register,
     formState: { errors },
   } = useFormContext();
-
-  useEffect(() => {
-    reset({});
-  }, []);
 
   return (
     <div className='flex flex-col gap-6'>

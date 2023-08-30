@@ -9,6 +9,8 @@ import React, { useEffect, useState } from 'react';
 export default function Dashboard() {
   const [openJobFormDialog, setOpenJobFormDialog] = useState(false);
   const [jobs, setJobs] = useState([]);
+  const [jobIndex, setJobIndex] = useState(null);
+  const isEditJob = typeof jobIndex === 'number';
 
   const fetchJobs = async () => {
     try {
@@ -28,8 +30,22 @@ export default function Dashboard() {
   };
 
   const handleSaveJob = (formData) => {
-    setJobs([...jobs, formData]);
+    if (isEditJob) {
+      const jobsData = [...jobs];
+      jobsData.splice(jobIndex, 1, formData);
+
+      setJobIndex(null);
+      setJobs(jobsData);
+    } else {
+      setJobs([...jobs, formData]);
+    }
+
     handleJobFormClose();
+  };
+
+  const handleEditJob = (jobIndex) => {
+    setJobIndex(jobIndex);
+    setOpenJobFormDialog(true);
   };
 
   useEffect(() => {
@@ -47,10 +63,11 @@ export default function Dashboard() {
 
       <div className='px-[85px]'>
         <div className='grid grid-cols-2 gap-x-[83px] gap-y-[79px] pt-[30px] pb-[49px]'>
-          {jobs.map((job) => (
+          {jobs.map((job, jobIndex) => (
             <JobCard
               key={job?.id}
               jobDetail={job}
+              onEdit={() => handleEditJob(jobIndex)}
             />
           ))}
         </div>
@@ -60,6 +77,8 @@ export default function Dashboard() {
         open={openJobFormDialog}
         onClose={handleJobFormClose}
         onSave={handleSaveJob}
+        isEdit={isEditJob}
+        jobDetail={jobs[jobIndex] || {}}
       />
     </div>
   );
