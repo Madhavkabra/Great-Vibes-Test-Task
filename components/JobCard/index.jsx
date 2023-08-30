@@ -1,11 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
+import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid';
 import Card from '../Card';
 import Typography from '../Typography';
 import Button from '../Button';
+import { formatNumber } from '@/functions/formatNumber';
 
-export default function JobCard({ jobDetail }) {
+export default function JobCard({ jobDetail, onEdit }) {
   return (
     <Card className='py-4 px-6 min-w-[600px]'>
       <div className='flex gap-2'>
@@ -36,7 +38,8 @@ export default function JobCard({ jobDetail }) {
               {jobDetail.experience.max} years)
             </Typography>
             <Typography>
-              INR (₹) {jobDetail.salary.min} - {jobDetail.salary.max} / Month
+              INR (₹) {formatNumber(jobDetail.salary.min)}-{' '}
+              {formatNumber(jobDetail.salary.max)} / Month
             </Typography>
             <Typography>{jobDetail.totalEmployee} employees</Typography>
           </div>
@@ -50,12 +53,21 @@ export default function JobCard({ jobDetail }) {
             />
           )}
         </div>
+
+        <div className='flex gap-2 self-start items-center'>
+          <PencilSquareIcon
+            className='h-6 w-6 cursor-pointer text-primary hover:opacity-70'
+            onClick={onEdit}
+          />
+          <TrashIcon className='h-6 w-6  cursor-pointer text-placeholder hover:opacity-70' />
+        </div>
       </div>
     </Card>
   );
 }
 
 JobCard.propTypes = {
+  onEdit: PropTypes.func.isRequired,
   jobDetail: PropTypes.shape({
     companyName: PropTypes.string.isRequired,
     companyLogo: PropTypes.string.isRequired,
