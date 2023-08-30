@@ -7,7 +7,7 @@ import Typography from '../Typography';
 import Button from '../Button';
 import { formatNumber } from '@/functions/formatNumber';
 
-export default function JobCard({ jobDetail, onEdit }) {
+export default function JobCard({ jobDetail, onEdit, onDelete }) {
   return (
     <Card className='py-4 px-6 min-w-[600px]'>
       <div className='flex gap-2'>
@@ -59,7 +59,10 @@ export default function JobCard({ jobDetail, onEdit }) {
             className='h-6 w-6 cursor-pointer text-primary hover:opacity-70'
             onClick={onEdit}
           />
-          <TrashIcon className='h-6 w-6  cursor-pointer text-placeholder hover:opacity-70' />
+          <TrashIcon
+            className='h-6 w-6  cursor-pointer text-placeholder hover:opacity-70'
+            onClick={onDelete}
+          />
         </div>
       </div>
     </Card>
@@ -68,6 +71,7 @@ export default function JobCard({ jobDetail, onEdit }) {
 
 JobCard.propTypes = {
   onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   jobDetail: PropTypes.shape({
     companyName: PropTypes.string.isRequired,
     companyLogo: PropTypes.string.isRequired,

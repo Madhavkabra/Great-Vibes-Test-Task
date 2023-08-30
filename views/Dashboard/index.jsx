@@ -1,16 +1,21 @@
 'use client';
 
+import { deleteJob } from '@/apis/job/delete';
 import { getJobs } from '@/apis/job/get';
 import Button from '@/components/Button';
+import ConfirmationDialog from '@/components/ConfirmationDialog';
 import JobCard from '@/components/JobCard';
 import JobFormDialog from '@/components/JobFormDialog';
+import Typography from '@/components/Typography';
 import React, { useEffect, useState } from 'react';
 
 export default function Dashboard() {
   const [openJobFormDialog, setOpenJobFormDialog] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [jobIndex, setJobIndex] = useState(null);
-  const isEditJob = typeof jobIndex === 'number';
+  const [isEditJob, setIsEditJob] = useState(false);
+  const [openDeleteConfirmationDialog, setOpenDeleteConfirmationDialog] =
+    useState(false);
 
   const fetchJobs = async () => {
     try {
@@ -40,12 +45,38 @@ export default function Dashboard() {
       setJobs([...jobs, formData]);
     }
 
+    setIsEditJob(false);
     handleJobFormClose();
   };
 
   const handleEditJob = (jobIndex) => {
     setJobIndex(jobIndex);
+    setIsEditJob(true);
     setOpenJobFormDialog(true);
+  };
+
+  const handleDeleteJob = (jobIndex) => {
+    setJobIndex(jobIndex);
+    setOpenDeleteConfirmationDialog(true);
+  };
+
+  const resetDeleteJobStates = () => {
+    setJobIndex(null);
+    setOpenDeleteConfirmationDialog(false);
+  };
+
+  const handleConfirmDeleteJob = async () => {
+    try {
+      await deleteJob(jobs[jobIndex]?.id);
+      const jobsData = [...jobs];
+      jobsData.splice(jobIndex, 1);
+
+      setJobs(jobsData);
+    } catch (error) {
+      console.error(error);
+    }
+
+    resetDeleteJobStates();
   };
 
   useEffect(() => {
@@ -68,6 +99,7 @@ export default function Dashboard() {
               key={job?.id}
               jobDetail={job}
               onEdit={() => handleEditJob(jobIndex)}
+              onDelete={() => handleDeleteJob(jobIndex)}
             />
           ))}
         </div>
@@ -80,6 +112,17 @@ export default function Dashboard() {
         isEdit={isEditJob}
         jobDetail={jobs[jobIndex] || {}}
       />
+
+      <ConfirmationDialog
+        open={openDeleteConfirmationDialog}
+        onClose={resetDeleteJobStates}
+        onCancel={resetDeleteJobStates}
+        onConfirm={handleConfirmDeleteJob}
+      >
+        <Typography>
+          Do you want to delete {jobs?.[jobIndex]?.title} job?
+        </Typography>
+      </ConfirmationDialog>
     </div>
   );
 }
