@@ -1,6 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { BUTTON_VARIANT } from '@/constants/button';
 import Card from '../Card';
 import Button from '../Button';
 
@@ -26,8 +27,8 @@ export default function ConfirmationDialog({
               <div className='flex self-end gap-2'>
                 <Button
                   label='Cancel'
+                  variant={BUTTON_VARIANT.SECONDARY}
                   onClick={onCancel}
-                  variant='secondary'
                 />
                 <Button
                   label='Confirm'

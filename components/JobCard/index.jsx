@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/20/solid';
 import { formatNumber } from '@/functions/formatNumber';
 import { APPLY_TYPE } from '@/constants/jobForm';
+import { BUTTON_VARIANT } from '@/constants/button';
 import Card from '../Card';
 import Typography from '../Typography';
 import Button from '../Button';
@@ -49,7 +50,7 @@ export default function JobCard({ jobDetail, onEdit, onDelete }) {
             <Button label={'Apply Now'} />
           ) : (
             <Button
-              variant='secondary'
+              variant={BUTTON_VARIANT.SECONDARY}
               label={'External Apply'}
             />
           )}
