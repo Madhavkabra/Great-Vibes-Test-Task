@@ -36,7 +36,7 @@ export default function JobFormStep1() {
         {...register('industry', { required: 'Industry is required' })}
       />
 
-      <div className='grid grid-cols-2 gap-6'>
+      <div className='grid grid-cols-2 gap-6 max-md:grid-cols-1'>
         <Input
           label='Location'
           placeholder='ex. Chennai'

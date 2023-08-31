@@ -26,7 +26,7 @@ export default function JobFormStep2() {
     <div className='flex flex-col gap-6'>
       <Field>
         <InputLabel label='Experience' />
-        <div className='grid grid-cols-2 gap-6'>
+        <div className='grid grid-cols-2 gap-6 max-md:grid-cols-1 max-md:gap-4'>
           <Input
             placeholder='Minimum'
             type='number'
@@ -58,7 +58,7 @@ export default function JobFormStep2() {
 
       <Field>
         <InputLabel label='Salary' />
-        <div className='grid grid-cols-2 gap-6'>
+        <div className='grid grid-cols-2 gap-6 max-md:grid-cols-1 max-md:gap-4'>
           <Input
             placeholder='Minimum'
             type='number'

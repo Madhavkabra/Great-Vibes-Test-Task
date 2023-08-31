@@ -95,20 +95,20 @@ export default function Dashboard() {
 
   return (
     <div className='bg-light-silver min-h-screen'>
-      <div className='px-[85px] py-8'>
+      <div className='px-[85px] py-8 max-lg:px-4 max-xl:px-10'>
         <Button
           label='Create Job'
           onClick={handleClickOnCreateJobButton}
         />
       </div>
 
-      <div className='px-[85px]'>
+      <div className='px-[85px] max-lg:px-4 max-xl:px-10'>
         {isLoading ? (
           <div className='flex justify-center items-center h-64'>
             <Loader />
           </div>
         ) : (
-          <div className='grid grid-cols-2 gap-x-[83px] gap-y-[79px] pt-[30px] pb-[49px]'>
+          <div className='grid grid-cols-2 gap-x-[83px] gap-y-[79px] pt-[30px] pb-[49px] max-lg:gap-x-5 max-lg:gap-y-5 max-xl:gap-x-8 max-xl:gap-y-8 max-lg:grid-cols-1'>
             {jobs.map((job, jobIndex) => (
               <JobCard
                 key={job?.id}

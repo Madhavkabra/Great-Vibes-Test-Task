@@ -33,7 +33,7 @@ export default function JobFormDialog({
     >
       <div className='fixed inset-0 flex items-center justify-center p-4 backdrop-blur-sm bg-black/50'>
         <Dialog.Panel>
-          <Card className='w-[577px] relative'>
+          <Card className='w-[577px] relative max-sm:w-[310px] max-sm:p-4'>
             <FormProvider {...methods}>
               <JobFormStepper
                 onSave={onSave}

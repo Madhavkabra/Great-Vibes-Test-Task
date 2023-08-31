@@ -24,7 +24,7 @@ export default function ConfirmationDialog({
     >
       <div className='fixed inset-0 flex items-center justify-center p-4 backdrop-blur-sm bg-black/50'>
         <Dialog.Panel>
-          <Card className='w-[577px] flex flex-col gap-6'>
+          <Card className='w-[577px] flex flex-col gap-6 max-sm:w-[310px] max-sm:p-4'>
             <Dialog.Title className='text-xl font-semibold'>
               {heading}
             </Dialog.Title>
@@ -32,10 +32,10 @@ export default function ConfirmationDialog({
             <div className='flex flex-col gap-24'>
               {children}
 
-              <div className='flex self-end gap-2'>
+              <div className='flex self-end gap-2 max-md:w-full'>
                 <Button
                   tabIndex={-1}
-                  width='w-[91px]'
+                  width='w-[91px] max-md:w-full'
                   label='Cancel'
                   variant={BUTTON_VARIANT.SECONDARY}
                   onClick={onCancel}
@@ -43,7 +43,7 @@ export default function ConfirmationDialog({
                 />
                 <Button
                   label='Confirm'
-                  width='w-[97px]'
+                  width='w-[97px] max-md:w-full'
                   onClick={onConfirm}
                   loading={isConfirm}
                 />

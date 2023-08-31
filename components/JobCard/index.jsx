@@ -11,7 +11,7 @@ import Button from '../Button';
 
 export default function JobCard({ jobDetail, onEdit, onDelete }) {
   return (
-    <Card className='py-4 px-6 min-w-[420px]'>
+    <Card className='py-4 px-6 min-w-[200px] max-md:px-2'>
       <div className='flex gap-2'>
         <div>
           <Image
@@ -19,7 +19,7 @@ export default function JobCard({ jobDetail, onEdit, onDelete }) {
             alt={jobDetail.companyName}
             height={48}
             width={48}
-            className='rounded-1x min-h-[48px] min-w-[48px]'
+            className='rounded-1x min-h-[48px] min-w-[48px] max-md:min-w-[32px] max-md:min-h-[32px]'
           />
         </div>
         <div className='flex flex-col flex-grow gap-6 '>
@@ -27,7 +27,7 @@ export default function JobCard({ jobDetail, onEdit, onDelete }) {
             <Typography
               variant='h1'
               className='line-clamp-2'
-              fontSize='text-2xl'
+              fontSize='text-2xl max-md:text-xl'
             >
               {jobDetail.title}
             </Typography>
@@ -80,12 +80,12 @@ export default function JobCard({ jobDetail, onEdit, onDelete }) {
 
         <div className='flex gap-2 self-start items-center'>
           <PencilSquareIcon
-            className='h-6 w-6 cursor-pointer text-primary hover:opacity-70'
+            className='h-6 w-6 cursor-pointer text-primary hover:opacity-70 max-md:h-5 max-md:w-5'
             onClick={onEdit}
             title='Edit'
           />
           <TrashIcon
-            className='h-6 w-6  cursor-pointer text-placeholder hover:opacity-70'
+            className='h-6 w-6  cursor-pointer text-placeholder hover:opacity-70 max-md:h-5 max-md:w-5'
             onClick={onDelete}
             title='Delete'
           />
