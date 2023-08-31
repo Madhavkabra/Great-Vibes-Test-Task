@@ -84,7 +84,8 @@ export default function JobFormStepper({ onSave, isEdit }) {
 
         <Button
           label={activeStep === 0 ? 'Next' : 'Save'}
-          className='self-end w-[68px]'
+          className='self-end'
+          width='w-[68px] max-md:w-full'
           onClick={handleClickNextButton}
           loading={isSubmitting}
         />
