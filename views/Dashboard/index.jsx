@@ -18,6 +18,7 @@ export default function Dashboard() {
   const [openDeleteConfirmationDialog, setOpenDeleteConfirmationDialog] =
     useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchJobs = async () => {
     setIsLoading(true);
@@ -72,6 +73,8 @@ export default function Dashboard() {
   };
 
   const handleConfirmDeleteJob = async () => {
+    setIsDeleting(true);
+
     try {
       await deleteJob(jobs[jobIndex]?.id);
       const jobsData = [...jobs];
@@ -83,6 +86,7 @@ export default function Dashboard() {
     }
 
     resetDeleteJobStates();
+    setIsDeleting(false);
   };
 
   useEffect(() => {
@@ -131,6 +135,7 @@ export default function Dashboard() {
         onCancel={resetDeleteJobStates}
         onConfirm={handleConfirmDeleteJob}
         heading='Delete Job'
+        isConfirm={isDeleting}
       >
         <Typography>
           Do you want to delete {jobs?.[jobIndex]?.title} job?

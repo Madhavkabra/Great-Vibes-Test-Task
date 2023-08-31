@@ -66,9 +66,11 @@ export default function JobCard({ jobDetail, onEdit, onDelete }) {
             </Typography>
           </div>
 
-          {jobDetail.applyType === APPLY_TYPE.QUICK ? (
+          {jobDetail.applyType === APPLY_TYPE.QUICK && (
             <Button label={'Apply Now'} />
-          ) : (
+          )}
+
+          {jobDetail.applyType === APPLY_TYPE.EXTERNAL && (
             <Button
               variant={BUTTON_VARIANT.SECONDARY}
               label={'External Apply'}

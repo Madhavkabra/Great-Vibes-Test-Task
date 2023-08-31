@@ -14,6 +14,7 @@ export default function ConfirmationDialog({
   children,
   onConfirm,
   onCancel,
+  isConfirm,
 }) {
   return (
     <Dialog
@@ -34,13 +35,17 @@ export default function ConfirmationDialog({
               <div className='flex self-end gap-2'>
                 <Button
                   tabIndex={-1}
+                  width='w-[91px]'
                   label='Cancel'
                   variant={BUTTON_VARIANT.SECONDARY}
                   onClick={onCancel}
+                  disabled={isConfirm}
                 />
                 <Button
                   label='Confirm'
+                  width='w-[97px]'
                   onClick={onConfirm}
+                  loading={isConfirm}
                 />
               </div>
             </div>
@@ -54,6 +59,7 @@ export default function ConfirmationDialog({
 ConfirmationDialog.propTypes = {
   heading: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
+  isConfirm: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   onConfirm: PropTypes.func.isRequired,
