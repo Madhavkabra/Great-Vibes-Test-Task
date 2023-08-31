@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function Loader() {
+export default function Loader({
+  height = 'w-8',
+  width = 'h-8',
+  color = 'fill-primary',
+}) {
   return (
     <div role='status'>
       <svg
         aria-hidden='true'
-        className='w-8 h-8 mr-2 text-white animate-spin fill-primary'
+        className={`${height} ${width} ${color} text-white animate-spin`}
         viewBox='0 0 100 101'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
@@ -22,3 +27,9 @@ export default function Loader() {
     </div>
   );
 }
+
+Loader.propTypes = {
+  height: PropTypes.string,
+  width: PropTypes.string,
+  AbortController: PropTypes.string,
+};
