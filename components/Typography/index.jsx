@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const variantsMapping = {
   h1: 'h1',
@@ -6,28 +7,32 @@ const variantsMapping = {
   body1: 'p',
 };
 
-const stylesByVariant = {
-  h1: 'text-2xl',
-  h2: 'text-xl',
-  body1: 'text-base',
-};
-
 export default function Typography({
   children,
   variant = 'body1',
-  className,
+  fontWeight = 'font-normal',
+  color = 'text-dark',
+  fontSize = 'text-base',
+  className = '',
   ...props
 }) {
   const Component = variantsMapping[variant];
 
   return (
     <Component
-      className={
-        className || `font-normal text-dark ${stylesByVariant[variant]}`
-      }
+      className={`${fontWeight} ${color} ${fontSize} ${className}`}
       {...props}
     >
       {children}
     </Component>
   );
 }
+
+Typography.propTypes = {
+  children: PropTypes.node.isRequired,
+  variant: PropTypes.oneOf(['h1', 'h2', 'body1']),
+  fontWeight: PropTypes.string,
+  color: PropTypes.string,
+  fontSize: PropTypes.string,
+  className: PropTypes.string,
+};
