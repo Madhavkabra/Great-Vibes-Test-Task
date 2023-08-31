@@ -36,3 +36,8 @@ This application provides a basic job portal, where we can perform CRUD operatio
 8. Integrate API with axios
 9. Reusable components
 10. UI looks similar to figma
+11. Add application's background color(#D8D8D8) as given in figma
+12. Add confirmation modal to confirm before delete job
+13. Add backdrop to modal
+14. There is no required fields in 2nd step but we have handled other validations like maximum salary/experience should be greater than minimum value, minimum value is required when only enter maximum values.
+15. Truncate job card heading texts after 2 lines
