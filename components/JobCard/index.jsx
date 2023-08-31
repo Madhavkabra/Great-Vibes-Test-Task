@@ -15,35 +15,55 @@ export default function JobCard({ jobDetail, onEdit, onDelete }) {
       <div className='flex gap-2'>
         <div>
           <Image
-            src={jobDetail.companyLogo || './netflix.svg'}
+            src={jobDetail?.companyLogo || './netflix.svg'}
             alt={jobDetail.companyName}
             height={48}
             width={48}
-            className='rounded-1x h-12'
+            className='rounded-1x min-h-[48px] min-w-[48px]'
           />
         </div>
         <div className='flex flex-col flex-grow gap-6 '>
           <div>
-            <Typography variant='h1'>{jobDetail.title}</Typography>
-            <Typography>
+            <Typography
+              variant='h1'
+              className='line-clamp-2'
+              fontSize='text-2xl'
+            >
+              {jobDetail.title}
+            </Typography>
+
+            <Typography className='line-clamp-2'>
               {jobDetail.companyName} - {jobDetail.industry}
             </Typography>
-            <Typography className='text-placeholder text-base font-normal'>
-              {jobDetail.location} ({jobDetail.remoteType})
+
+            <Typography
+              color='text-placeholder'
+              className='line-clamp-2'
+            >
+              {jobDetail?.location}{' '}
+              {jobDetail?.remoteType ? `(${jobDetail.remoteType})` : ''}
             </Typography>
           </div>
 
           <div className='flex flex-col gap-2'>
             <Typography>Part-Time (9.00 am - 5.00 pm IST)</Typography>
+
             <Typography>
-              Experience ({jobDetail.experience.min} -{' '}
-              {jobDetail.experience.max} years)
+              {typeof jobDetail?.experience?.min === 'number' &&
+                `Experience (${jobDetail.experience.min} - ${jobDetail.experience.max} years)`}
             </Typography>
+
             <Typography>
-              INR (₹) {formatNumber(jobDetail.salary.min)}-{' '}
-              {formatNumber(jobDetail.salary.max)} / Month
+              {typeof jobDetail.salary?.min === 'number' &&
+                `INR (₹) ${formatNumber(jobDetail.salary.min)} - ${formatNumber(
+                  jobDetail.salary.max
+                )} / Month`}
             </Typography>
-            <Typography>{jobDetail.totalEmployee} employees</Typography>
+
+            <Typography>
+              {jobDetail?.totalEmployee &&
+                `${jobDetail.totalEmployee} employees`}
+            </Typography>
           </div>
 
           {jobDetail.applyType === APPLY_TYPE.QUICK ? (
@@ -81,18 +101,17 @@ JobCard.propTypes = {
     companyLogo: PropTypes.string,
     title: PropTypes.string.isRequired,
     industry: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    remoteType: PropTypes.string.isRequired,
+    location: PropTypes.string,
+    remoteType: PropTypes.string,
     experience: PropTypes.shape({
-      min: PropTypes.number.isRequired,
-      max: PropTypes.number.isRequired,
-    }).isRequired,
+      min: PropTypes.number,
+      max: PropTypes.number,
+    }),
     salary: PropTypes.shape({
-      min: PropTypes.number.isRequired,
-      max: PropTypes.number.isRequired,
-    }).isRequired,
-    totalEmployee: PropTypes.string.isRequired,
-    applyType: PropTypes.oneOf([APPLY_TYPE.EXTERNAL, APPLY_TYPE.QUICK])
-      .isRequired,
+      min: PropTypes.number,
+      max: PropTypes.number,
+    }),
+    totalEmployee: PropTypes.string,
+    applyType: PropTypes.oneOf([APPLY_TYPE.EXTERNAL, APPLY_TYPE.QUICK]),
   }).isRequired,
 };

@@ -39,18 +39,14 @@ export default function JobFormStep1() {
       <div className='grid grid-cols-2 gap-6'>
         <Input
           label='Location'
-          required
           placeholder='ex. Chennai'
-          error={errors.location?.message}
-          {...register('location', { required: 'Location is required' })}
+          {...register('location')}
         />
 
         <Input
           label='Remote type'
-          required
           placeholder='ex. In-office'
-          error={errors.remoteType?.message}
-          {...register('remoteType', { required: 'Remote type is required' })}
+          {...register('remoteType')}
         />
       </div>
     </div>

@@ -7,6 +7,7 @@ import Input from '../Input';
 import Field from '../Field';
 import InputLabel from '../InputLabel';
 import RadioInput from '../RadioInput';
+import { checkNumber } from '@/functions/checkNumber';
 
 export default function JobFormStep2() {
   const {
@@ -16,21 +17,26 @@ export default function JobFormStep2() {
     formState: { errors },
   } = useFormContext();
 
+  const minExperience = getValues('experience.min');
+  const maxExperience = getValues('experience.max');
+  const minSalary = getValues('salary.min');
+  const maxSalary = getValues('salary.max');
+
   return (
     <div className='flex flex-col gap-6'>
       <Field>
-        <InputLabel
-          label='Experience'
-          required
-        />
+        <InputLabel label='Experience' />
         <div className='grid grid-cols-2 gap-6'>
           <Input
             placeholder='Minimum'
             type='number'
             error={errors.experience?.min?.message}
             {...register('experience.min', {
-              required: 'Experience is required',
               valueAsNumber: true,
+              validate: (value) =>
+                checkNumber(maxExperience)
+                  ? !!value || 'Minimum experience is required'
+                  : true,
             })}
           />
 
@@ -39,29 +45,30 @@ export default function JobFormStep2() {
             type='number'
             error={errors.experience?.max?.message}
             {...register('experience.max', {
-              required: 'Experience is required',
               valueAsNumber: true,
               validate: (value) =>
-                value > getValues('experience.min') ||
-                'Should be greater than minimum experience',
+                checkNumber(minExperience)
+                  ? value > minExperience ||
+                    'Should be greater than minimum experience'
+                  : true,
             })}
           />
         </div>
       </Field>
 
       <Field>
-        <InputLabel
-          label='Salary'
-          required
-        />
+        <InputLabel label='Salary' />
         <div className='grid grid-cols-2 gap-6'>
           <Input
             placeholder='Minimum'
             type='number'
             error={errors.salary?.min?.message}
             {...register('salary.min', {
-              required: 'Salary is required',
               valueAsNumber: true,
+              validate: (value) =>
+                checkNumber(maxSalary)
+                  ? !!value || 'Minimum salary is required'
+                  : true,
             })}
           />
 
@@ -70,37 +77,30 @@ export default function JobFormStep2() {
             type='number'
             error={errors.salary?.max?.message}
             {...register('salary.max', {
-              required: 'Salary is required',
               valueAsNumber: true,
               validate: (value) =>
-                value > getValues('salary.min') ||
-                'Should be greater than minimum salary',
+                checkNumber(minSalary)
+                  ? value > minSalary || 'Should be greater than minimum salary'
+                  : true,
             })}
           />
         </div>
       </Field>
 
       <Input
-        required
         label='Total employee'
         placeholder='ex. 100'
-        error={errors.totalEmployee?.message}
-        {...register('totalEmployee', {
-          required: 'Total employee is required',
-        })}
+        {...register('totalEmployee')}
       />
 
       <Controller
         name='applyType'
         control={control}
-        rules={{ required: 'Apply type is required' }}
         render={({ field: { value, onChange } }) => (
           <RadioInput
             value={value || ''}
             label='Apply type'
             onChange={onChange}
-            error={errors.applyType?.message}
-            required
             options={[
               { id: '01', label: 'Quick apply', value: APPLY_TYPE.QUICK },
               { id: '02', label: 'External apply', value: APPLY_TYPE.EXTERNAL },
