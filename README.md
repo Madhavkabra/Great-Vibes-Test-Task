@@ -41,3 +41,4 @@ This application provides a basic job portal, where we can perform CRUD operatio
 13. Add backdrop to modal
 14. There is no required fields in 2nd step but we have handled other validations like maximum salary/experience should be greater than minimum value, minimum value is required when only enter maximum values.
 15. Truncate job card heading texts after 2 lines
+16. Make Responsive UI (in small screens one card shows in one row and in form all fields show in individual row)
