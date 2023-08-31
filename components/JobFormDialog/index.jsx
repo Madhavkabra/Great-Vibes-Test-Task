@@ -31,7 +31,7 @@ export default function JobFormDialog({
       onClose={onClose}
       className='relative z-50'
     >
-      <div className='fixed inset-0 flex items-center justify-center p-4'>
+      <div className='fixed inset-0 flex items-center justify-center p-4 backdrop-blur-sm bg-black/50'>
         <Dialog.Panel>
           <Card className='w-[577px] relative'>
             <FormProvider {...methods}>
@@ -60,12 +60,12 @@ JobFormDialog.propTypes = {
     location: PropTypes.string,
     remoteType: PropTypes.string,
     experience: PropTypes.shape({
-      min: PropTypes.number.isRequired,
-      max: PropTypes.number.isRequired,
+      min: PropTypes.number,
+      max: PropTypes.number,
     }),
     salary: PropTypes.shape({
-      min: PropTypes.number.isRequired,
-      max: PropTypes.number.isRequired,
+      min: PropTypes.number,
+      max: PropTypes.number,
     }),
     totalEmployee: PropTypes.string,
     applyType: PropTypes.oneOf(['quick', 'external']),
